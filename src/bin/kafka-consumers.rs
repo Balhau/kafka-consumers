@@ -10,17 +10,12 @@ extern crate serde_yaml;
 
 use std::fs::File;
 use std::io::prelude::*;
-use std::process::Command;
-use kafkaconsumers::kafka::consumer::KafkaConsumerEntry;
 use kafkaconsumers::kafka::consumer::KafkaCommands;
 use kafkaconsumers::kafka::consumer::Metric;
 
 use hyper::{Method, Request, Client};
 use futures::Future;
 use futures::Stream;
-use hyper::client::FutureResponse;
-use hyper::header::{ContentLength, ContentType};
-use hyper::Body;
 use tokio_core::reactor::Core;
 
 use std::thread;
@@ -62,8 +57,8 @@ fn main() {
             let c_server = kserver.clone();
             let influx = configs.influx_server.clone();
             thread::spawn( move|| {
-                let mut core = Core::new().unwrap();
-                let client = Client::new(&core.handle());
+                let mut _core = Core::new().unwrap();
+                let client = Client::new(&_core.handle());
                 let stats = KafkaCommands::groupDescribe(&c_command_path,&c_server,&c_clone);
                 for entry in stats.iter() {
                     let c_uri_influx = influx.parse().unwrap();
@@ -75,7 +70,11 @@ fn main() {
                         res.body().concat2()
                     });
 
-                    core.run(post);
+                    let r = _core.run(post);
+                    match r {
+                        Err(e) => println! ("Error while posting data {:?}",e),
+                        _ => print!("")
+                    }
                 }
                 println!("Metrics sent for {}",c_clone);
             });
