@@ -29,6 +29,6 @@ When we comunicate we usually do that by talking. When we talk the ratio at whic
 
 ![Exorcist](https://i.pinimg.com/736x/40/96/6f/40966f820c46ffea84843d7b0f06dd9d--exorcist-movie-the-exorcist.jpg)
 
-But imagine this possessed girl trashing out a thousand words per minute. It would be virtually impossible to tackle that speed. Some seconds and you would be completely out of context, even if the pretty demon speaks with coherence. So you can apply a strategy you call 50 friends and each of one is responsible to track one second a time of information. How this resembles kafka, topics and partitions? 
+But imagine this possessed girl trashing out a thousand words per minute. It would be virtually impossible to tackle that speed. Some seconds and you would be completely out of context, even if the pretty demon speaks with coherence. So you can apply a strategy you call 60 friends and each of one is responsible to track one second a time of information. How this resembles kafka, topics and partitions? You can think of this 60 friends as 60 topic partitions. And send each second of information to each partition within the topic **little.daemon.girl**. At the end of each partition would be a person reading the content of each partition that enters at a human velocity.
 
 Kafka-Consumers is a **Rust** command tool that aims to extract and publish, mainly for time series databases, information regarding
