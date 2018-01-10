@@ -1,0 +1,4 @@
+---
+command_path: /home/vitorfernandes/tools/kafka_2.12-0.11.0.2/bin/kafka-consumer-groups.sh
+kafka_server: ie2-kdp001b-nxt.nxt.betfair:9092
+influx_server: http://localhost:8086/write?db=graphite
